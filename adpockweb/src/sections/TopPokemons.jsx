@@ -13,7 +13,7 @@ export default function TopPokemons() {
 
     return (
         <div>
-            <div className='grid grid-cols-3'>
+            <div className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3'>
                 {topPokemon.map(pokemon =>
                     <PokemonCard
                         pokemon={pokemon}
