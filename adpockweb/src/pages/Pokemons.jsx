@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PokemonCard from '../components/PokemonCard'
 import { usePokemons } from '../hooks/usePokemons'
 import Skeleton from '../components/ui/Skeleton'
+import Hero from '../sections/Hero'
 
 export default function Pokemons() {
 
@@ -13,11 +14,16 @@ export default function Pokemons() {
         pokemon.name.toLowerCase().includes(search.toLowerCase())
     ) || []
 
+    const titulo = 'Entrenador, tu aventura comienza aquí'
+    const contenido = 'Accede a la Pokédex y analiza las estadísticas de tus Pokémon favoritos.'
+
     return (
         <div>
+            <Hero titulo={titulo} contenido={contenido} ></Hero>
             <div className='container mx-auto text-center'>
                 <div>
-                    <h1 className='my-10'><p className='bg-red-500 rounded-sm text-4xl font-extrabold p-5 text-white'>Nuestros Pokemones</p></h1>
+
+                    <h1 className='my-10'><p className='badge bg-red-600 rounded-sm text-4xl font-extrabold p-5 text-white'>Nuestros Pokemones</p></h1>
                     {/* Busqueda de Pokemones - Dinámico */}
                     <div className="join gap-2 mb-10">
                         <div className='self-center'>Introduzca su búsqueda: </div>

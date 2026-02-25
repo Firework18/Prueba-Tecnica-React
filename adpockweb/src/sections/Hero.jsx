@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Hero() {
+export default function Hero({ titulo, contenido, boton }) {
     return (
         <div>
             <div
@@ -14,12 +14,11 @@ export default function Hero() {
                 <div className="hero-overlay"></div>
                 <div className="hero-content text-neutral-content text-center">
                     <div className="max-w-md">
-                        <h1 className="mb-5 text-5xl font-extrabold text-white">PokeWeb</h1>
-                        <p className="mb-5">
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                            quasi. In deleniti eaque aut repudiandae et a id nisi.
+                        <h1 className="mb-5 text-3xl font-extrabold text-white">{titulo}</h1>
+                        <p className="mb-5 text-sm">
+                            {contenido}
                         </p>
-                        <Link to='/pokemones'><button className="btn bg-red-600 text-white">Ver Pokemones</button></Link>
+                        {boton != null ? <Link to='/pokemones'> <button className='btn btn-secondary'>{boton}</button> </Link> : ''}
                     </div>
                 </div>
             </div >

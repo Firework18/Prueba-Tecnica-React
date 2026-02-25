@@ -8,20 +8,26 @@ export default function PokemonCard({ pokemon }) {
 
     const { data } = usePokemon(name)
 
-
     console.log(data)
 
     return (
         <>
-            <div className="card bg-secondary-content shadow-sm mx-10">
+            <div className="card bg-accent shadow-sm mx-10 px-20 my-10">
                 <figure className="px-5 pt-10">
                     <img
                         src={data?.sprites.front_default}
                         alt={name}
-                        className="rounded-xl bg-white" />
+                        className="rounded-xl bg-white w-50" />
                 </figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{name.toUpperCase()}</h2>
+
+                    <div className='grid grid-cols-2'>
+                        {data?.types.map(type =>
+                            <div className='badge badge-secondary'>{type?.type.name}</div>
+                        )}
+
+                    </div>
                     <div className="card-actions">
                         <button className="btn btn-primary">Ver Pokemon</button>
                     </div>

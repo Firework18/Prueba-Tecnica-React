@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, synthwave;
+  themes: light --default, dark --prefersdark, light;
 }
 
 ;
 
 @theme {
-  --font-sans: "Poppins", sans-serif;
+  --font-sans: "Press Start 2P", cursive;
 }
