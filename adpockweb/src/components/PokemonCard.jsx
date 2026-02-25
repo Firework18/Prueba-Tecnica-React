@@ -1,17 +1,24 @@
 import React from 'react'
+import { usePokemon } from '../hooks/usePokemon'
+import { usePokemons } from '../hooks/usePokemons'
 
 export default function PokemonCard({ pokemon }) {
 
     const { name } = pokemon
 
+    const { data } = usePokemon(name)
+
+
+    console.log(data)
+
     return (
         <>
-            <div className="card bg-base-100 w-96 shadow-sm">
-                <figure className="px-10 pt-10">
+            <div className="card bg-secondary-content shadow-sm mx-10">
+                <figure className="px-5 pt-10">
                     <img
-                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                        alt="Shoes"
-                        className="rounded-xl" />
+                        src={data?.sprites.front_default}
+                        alt={name}
+                        className="rounded-xl bg-white" />
                 </figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{name.toUpperCase()}</h2>

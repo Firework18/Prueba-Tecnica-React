@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export default function Navbar() {
     return (
         <>
-            <div className="navbar bg-secondary shadow-sm text-white">
+            <div className="navbar bg-red-600 shadow-sm text-white">
                 <div className="flex-1">
                     <Link to='/' className="btn btn-ghost text-xl">PokeWeb</Link>
                 </div>
@@ -13,9 +13,7 @@ export default function Navbar() {
                         <li><Link to='/'>Inicio</Link></li>
                         <li><Link to='/about'>Nosotros</Link></li>
                         <li><Link to='/pokemones'>Pokemones</Link></li>
-                        <li><a>Link</a></li>
-                        <li><a>Link</a></li>
-                        <li><a>Link</a></li>
+
                         {/* <li>
                             <details>
                                 <summary>Parent</summary>

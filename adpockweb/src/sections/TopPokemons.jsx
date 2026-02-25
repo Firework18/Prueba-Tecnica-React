@@ -4,7 +4,7 @@ import { usePokemons } from '../hooks/usePokemons'
 
 export default function TopPokemons() {
 
-    const { data, isLoading, error } = usePokemons('pokemon?limit=20')
+    const { data, isLoading, error } = usePokemons('/pokemon?limit=20')
 
     const topPokemon = data?.slice(0, 3)
 
