@@ -6,12 +6,13 @@ export default function Navbar() {
         <>
             <div className="navbar bg-secondary shadow-sm text-white">
                 <div className="flex-1">
-                    <a className="btn btn-ghost text-xl">PokeWeb</a>
+                    <Link to='/' className="btn btn-ghost text-xl">PokeWeb</Link>
                 </div>
                 <div className="flex-none">
                     <ul className="menu menu-horizontal px-1 font-bold">
                         <li><Link to='/'>Inicio</Link></li>
                         <li><Link to='/about'>Nosotros</Link></li>
+                        <li><Link to='/pokemones'>Pokemones</Link></li>
                         <li><a>Link</a></li>
                         <li><a>Link</a></li>
                         <li><a>Link</a></li>

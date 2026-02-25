@@ -19,7 +19,7 @@ export default function Hero() {
                             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
                             quasi. In deleniti eaque aut repudiandae et a id nisi.
                         </p>
-                        <Link to='/store'><button className="btn bg-red-600 text-white">Ver Pokemones</button></Link>
+                        <Link to='/pokemones'><button className="btn bg-red-600 text-white">Ver Pokemones</button></Link>
                     </div>
                 </div>
             </div >
