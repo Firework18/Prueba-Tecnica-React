@@ -9,7 +9,7 @@ export default function Navbar() {
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle lg:hidden">
-                        <i class="bi bi-list text-white"></i>
+                        <i className="bi bi-list text-white"></i>
                     </div>
 
                     <ul

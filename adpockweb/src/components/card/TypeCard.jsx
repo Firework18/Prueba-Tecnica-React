@@ -6,7 +6,7 @@ export default function TypeCard({ type }) {
 
     return (
         <div className="rounded-md hover:scale-105 transition-all hover:animate-pulse">
-            <img src={`/img/${name}.png`} alt="" className="w-full rounded-lg" />
+            <img src={`/img/${name}.png`} alt="" className="w-full  rounded-lg" />
             <p className='text-white'>{name}</p>
         </div>
     )

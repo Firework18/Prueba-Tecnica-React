@@ -18,7 +18,7 @@ export default function PokemonCard({ pokemon }) {
                     <img
                         src={pokemonData?.sprites.front_default}
                         alt={name}
-                        className="rounded-xl bg-white w-50" />
+                        className="rounded-xl bg-white max-w-full" />
                 </figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{name.toUpperCase()}</h2>
