@@ -5,14 +5,28 @@ import Skeleton from '../components/ui/Skeleton'
 import Hero from '../sections/Hero'
 import ErrorCard from '../components/ui/ErrorCard'
 import NotFoundCard from '../components/ui/NotFoundCard'
+import Pagination from './pokemonpage/Pagination'
 
 export default function Pokemons() {
 
+    const cantPokeTotal = 100
+    const { data, isLoading, error } = usePokemons(cantPokeTotal)
+
+    const pokeData = data ?? []
+    const [currentPage, setCurrentPage] = useState(1)
+    const [pokePerPage, setPokePerPage] = useState(9)
+
+    const lastPokeIndex = currentPage * pokePerPage
+    const firstPokeIndex = lastPokeIndex - pokePerPage
+
+    const currentPoke = pokeData?.slice(firstPokeIndex, lastPokeIndex)
+    console.log(currentPoke)
+
+
+
+    // Filtro de busqueda
     const [search, setSearch] = useState('')
-
-    const { data, isLoading, error } = usePokemons(20)
-
-    const filtered = data?.filter(pokemon =>
+    const filtered = currentPoke?.filter(pokemon =>
         pokemon.name.toLowerCase().includes(search.toLowerCase())
     ) || []
 
@@ -41,30 +55,67 @@ export default function Pokemons() {
                         </div>
                     </div>
 
+                    {/* Paginacion */}
+                    <section className='container mx-auto mb-10 max-w-2xl'>
+                        <Pagination totalPokes={pokeData?.length} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
+                        <div className='flex flex-col md:flex-row lg:flex-row gap-5 mt-5 place-content-center '>
+                            <div className='badge badge-secondary'>Filtrar por</div>
+                            <select name="filtrar" id="" value={pokePerPage}
+                                onChange={(e) => {
+                                    setPokePerPage(Number(e.target.value))
+                                    setCurrentPage(1)
+                                }}>
+                                <option value={10}>10 pokémones</option>
+                                <option value={20}>20 pokémones</option>
+                                <option value={50}>50 pokémones</option>
+                                <option value={100}>100 pokémones</option>
+                            </select>
+                        </div>
+                    </section>
+
+                    {/* Card de carga */}
                     <div className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 sm:gap-10 lg:gap-20'>
                         {isLoading && Array.from({ length: 3 }).map((_, index) => (
                             <Skeleton key={index} />
                         ))}
                     </div>
 
-
+                    {/* Card de error */}
                     {error && (
                         <ErrorCard></ErrorCard>
                     )}
 
-
+                    {/* Card de No encontrado */}
                     {!error && !isLoading && filtered.length === 0 && (
                         <NotFoundCard></NotFoundCard>
                     )}
 
+                    {/* Card de datos cargados */}
                     <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:gap-10 lg:gap-20'>
-                        {filtered.map(pokemon => (
+                        {filtered?.map(pokemon => (
                             <PokemonCard pokemon={pokemon} key={pokemon.name} />
                         ))}
                     </div>
 
                 </div>
 
+                {/* Paginacion */}
+                <section className='container mx-auto mb-10 max-w-2xl'>
+                    <Pagination totalPokes={pokeData?.length} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
+                    <div className='flex flex-col md:flex-row lg:flex-row gap-5 mt-5 place-content-center '>
+                        <div className='badge badge-secondary'>Filtrar por</div>
+                        <select name="filtrar" id="" value={pokePerPage}
+                            onChange={(e) => {
+                                setPokePerPage(Number(e.target.value))
+                                setCurrentPage(1)
+                            }}>
+                            <option value={10}>10 pokémones</option>
+                            <option value={20}>20 pokémones</option>
+                            <option value={50}>50 pokémones</option>
+                            <option value={100}>100 pokémones</option>
+                        </select>
+                    </div>
+                </section>
             </div>
         </div>
     )

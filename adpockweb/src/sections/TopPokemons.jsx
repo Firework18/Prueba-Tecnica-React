@@ -6,7 +6,7 @@ import ErrorCard from '../components/ui/ErrorCard'
 
 export default function TopPokemons() {
 
-    const { data, isLoading, error } = usePokemons('/pokemon?limit=20')
+    const { data, isLoading, error } = usePokemons(3)
 
     const topPokemon = data?.slice(0, 3)
 
