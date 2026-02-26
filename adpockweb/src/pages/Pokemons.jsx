@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PokemonCard from '../components/PokemonCard'
+import PokemonCard from '../components/card/PokemonCard'
 import { usePokemons } from '../hooks/usePokemons'
 import Skeleton from '../components/ui/Skeleton'
 import Hero from '../sections/Hero'

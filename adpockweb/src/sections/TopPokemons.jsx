@@ -1,5 +1,5 @@
 import React from 'react'
-import PokemonCard from '../components/PokemonCard'
+import PokemonCard from '../components/card/PokemonCard'
 import { usePokemons } from '../hooks/usePokemons'
 import Skeleton from '../components/ui/Skeleton'
 import ErrorCard from '../components/ui/ErrorCard'
