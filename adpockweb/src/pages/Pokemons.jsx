@@ -3,12 +3,14 @@ import PokemonCard from '../components/PokemonCard'
 import { usePokemons } from '../hooks/usePokemons'
 import Skeleton from '../components/ui/Skeleton'
 import Hero from '../sections/Hero'
+import ErrorCard from '../components/ui/ErrorCard'
+import NotFoundCard from '../components/ui/NotFoundCard'
 
 export default function Pokemons() {
 
     const [search, setSearch] = useState('')
 
-    const { data, isLoading, error } = usePokemons('pokemon?limit=20')
+    const { data, isLoading, error } = usePokemons(20)
 
     const filtered = data?.filter(pokemon =>
         pokemon.name.toLowerCase().includes(search.toLowerCase())
@@ -21,11 +23,11 @@ export default function Pokemons() {
         <div>
             <Hero titulo={titulo} contenido={contenido} ></Hero>
             <div className='container mx-auto text-center'>
-                <div>
+                <div className='m-10'>
 
-                    <h1 className='my-10'><p className='badge bg-red-600 rounded-sm text-4xl font-extrabold p-5 text-white'>Nuestros Pokemones</p></h1>
+                    <h1 className='my-10'><p className='badge bg-red-600 rounded-sm sm:text-1xl md:text-2xl font-extrabold p-5 text-white'>Nuestros Pokemones</p></h1>
                     {/* Busqueda de Pokemones - Dinámico */}
-                    <div className="join gap-2 mb-10">
+                    <div className="gap-2 mb-10 flex flex-col justify-center ">
                         <div className='self-center'>Introduzca su búsqueda: </div>
                         <div>
                             <label className="input validator join-item">
@@ -39,29 +41,27 @@ export default function Pokemons() {
                         </div>
                     </div>
 
-                    {isLoading && Array.from({ length: 4 }).map((_, index) => (
-                        <Skeleton key={index} />
-                    ))}
-
-                    {error && (
-                        <div>epesre</div>
-                    )}
-
-
-                    {!isLoading && !error && filtered.length === 0 && (
-                        <div className='flex justify-center'>
-                            No hallado
-                        </div>
-                    )}
-
-
-                    <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-1'>
-                        {filtered.map(pokemon => (
-                            <PokemonCard pokemon={pokemon} key={pokemon.name} />
+                    <div className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 sm:gap-10 lg:gap-20'>
+                        {isLoading && Array.from({ length: 3 }).map((_, index) => (
+                            <Skeleton key={index} />
                         ))}
                     </div>
 
 
+                    {error && (
+                        <ErrorCard></ErrorCard>
+                    )}
+
+
+                    {!error && !isLoading && filtered.length === 0 && (
+                        <NotFoundCard></NotFoundCard>
+                    )}
+
+                    <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:gap-10 lg:gap-20'>
+                        {filtered.map(pokemon => (
+                            <PokemonCard pokemon={pokemon} key={pokemon.name} />
+                        ))}
+                    </div>
 
                 </div>
 

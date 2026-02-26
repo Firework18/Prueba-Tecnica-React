@@ -12,7 +12,7 @@ export default function PokemonCard({ pokemon }) {
 
     return (
         <>
-            <div className="card bg-base-200 shadow-sm mx-10 px-20 my-10 hover:scale-105 transition-all">
+            <div className="card bg-primary-content shadow-sm hover:scale-105 transition-all">
                 <figure className="px-5 pt-10">
                     <img
                         src={data?.sprites.front_default}
