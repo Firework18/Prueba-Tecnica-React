@@ -1,7 +1,7 @@
 import React from 'react'
 import Pagination from '../pages/pokemonpage/Pagination'
 
-export default function PagSection({ pokeData, pokePerPage, setCurrentPage, currentPage, setPokePerPage }) {
+export default function PagSection({ pokeData, pokePerPage, setCurrentPage, currentPage, setPokePerPage, tipo }) {
     return (
         <div>
             <section className="my-10 flex flex-col items-center">
@@ -13,10 +13,10 @@ export default function PagSection({ pokeData, pokePerPage, setCurrentPage, curr
                             setPokePerPage(Number(e.target.value))
                             setCurrentPage(1)
                         }}>
-                        <option value={10}>10 pokémones</option>
-                        <option value={20}>20 pokémones</option>
-                        <option value={50}>50 pokémones</option>
-                        <option value={100}>100 pokémones</option>
+                        <option value={10}>10 {tipo}</option>
+                        <option value={20}>20 {tipo}</option>
+                        <option value={50}>50 {tipo}</option>
+                        <option value={100}>100 {tipo}</option>
                     </select>
                 </div>
             </section>

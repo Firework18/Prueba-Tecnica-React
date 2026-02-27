@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import About from "./pages/About"
 import Pokemons from "./pages/Pokemons"
 import PokemonDetail from "./pages/PokemonDetail"
+import Blog from "./pages/Blog"
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: '/pokemon/:name',
                 element: <PokemonDetail />
+            },
+            {
+                path: '/blog',
+                element: <Blog />
             }
         ]
     }

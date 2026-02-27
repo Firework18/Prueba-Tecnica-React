@@ -57,7 +57,7 @@ export default function Pokemons() {
                     </div>
 
                     {/* Paginacion */}
-                    <PagSection pokeData={pokeData} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setPokePerPage} />
+                    <PagSection pokeData={pokeData} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setPokePerPage} tipo={'pokémones'} />
 
                     {/* Card de carga */}
                     <div className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 sm:gap-10 lg:gap-20'>
