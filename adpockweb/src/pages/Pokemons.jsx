@@ -6,10 +6,11 @@ import Hero from '../sections/Hero'
 import ErrorCard from '../components/ui/ErrorCard'
 import NotFoundCard from '../components/ui/NotFoundCard'
 import Pagination from './pokemonpage/Pagination'
+import PagSection from '../sections/PagSection'
 
 export default function Pokemons() {
 
-    const cantPokeTotal = 100
+    const cantPokeTotal = 300
     const { data, isLoading, error } = usePokemons(cantPokeTotal)
 
     const pokeData = data ?? []
@@ -56,22 +57,7 @@ export default function Pokemons() {
                     </div>
 
                     {/* Paginacion */}
-                    <section className='container mx-auto mb-10 max-w-2xl'>
-                        <Pagination totalPokes={pokeData?.length} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
-                        <div className='flex flex-col md:flex-row lg:flex-row gap-5 mt-5 place-content-center '>
-                            <div className='badge badge-secondary'>Filtrar por</div>
-                            <select name="filtrar" id="" value={pokePerPage}
-                                onChange={(e) => {
-                                    setPokePerPage(Number(e.target.value))
-                                    setCurrentPage(1)
-                                }}>
-                                <option value={10}>10 pokémones</option>
-                                <option value={20}>20 pokémones</option>
-                                <option value={50}>50 pokémones</option>
-                                <option value={100}>100 pokémones</option>
-                            </select>
-                        </div>
-                    </section>
+                    <PagSection pokeData={pokeData} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setPokePerPage} />
 
                     {/* Card de carga */}
                     <div className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 sm:gap-10 lg:gap-20'>
@@ -97,25 +83,12 @@ export default function Pokemons() {
                         ))}
                     </div>
 
+                    {/* Paginacion */}
+                    <PagSection pokeData={pokeData} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setPokePerPage} />
+
                 </div>
 
-                {/* Paginacion */}
-                <section className='container mx-auto mb-10 max-w-2xl'>
-                    <Pagination totalPokes={pokeData?.length} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
-                    <div className='flex flex-col md:flex-row lg:flex-row gap-5 mt-5 place-content-center '>
-                        <div className='badge badge-secondary'>Filtrar por</div>
-                        <select name="filtrar" id="" value={pokePerPage}
-                            onChange={(e) => {
-                                setPokePerPage(Number(e.target.value))
-                                setCurrentPage(1)
-                            }}>
-                            <option value={10}>10 pokémones</option>
-                            <option value={20}>20 pokémones</option>
-                            <option value={50}>50 pokémones</option>
-                            <option value={100}>100 pokémones</option>
-                        </select>
-                    </div>
-                </section>
+
             </div>
         </div>
     )

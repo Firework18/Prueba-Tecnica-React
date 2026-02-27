@@ -2,14 +2,12 @@ import React from 'react'
 import { usePokemon } from '../../hooks/usePokemon'
 import { usePokemons } from '../../hooks/usePokemons'
 import { usePokemonType } from '../../hooks/usePokemonType'
+import { Link } from 'react-router-dom'
 
 export default function PokemonCard({ pokemon }) {
 
     const { name } = pokemon
-
     const { data: pokemonData } = usePokemon(name)
-
-
 
     return (
         <>
@@ -18,7 +16,7 @@ export default function PokemonCard({ pokemon }) {
                     <img
                         src={pokemonData?.sprites.front_default}
                         alt={name}
-                        className="rounded-xl bg-white max-w-full" />
+                        className="rounded-xl bg-white h-50" />
                 </figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{name.toUpperCase()}</h2>
@@ -30,7 +28,7 @@ export default function PokemonCard({ pokemon }) {
 
                     </div>
                     <div className="card-actions">
-                        <button className="btn btn-primary">Ver Pokemon</button>
+                        <Link to={`/pokemon/${name}`}><button className="btn btn-primary">Ver Pokemon</button></Link>
                     </div>
                 </div>
             </div>

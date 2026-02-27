@@ -4,6 +4,7 @@ import Layout from "./layouts/Layout"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Pokemons from "./pages/Pokemons"
+import PokemonDetail from "./pages/PokemonDetail"
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: '/pokemones',
                 element: <Pokemons />,
+            },
+            {
+                path: '/pokemon/:name',
+                element: <PokemonDetail />
             }
         ]
     }

@@ -1,25 +1,88 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Pagination({ totalPokes, pokePerPage, setCurrentPage, currentPage }) {
 
-    let pages = []
 
-    for (let i = 1; i <= Math.ceil(totalPokes / pokePerPage); i++) {
-        pages.push(i)
+    const totalPages = Math.ceil(totalPokes / pokePerPage)
+    const maxVisible = 5
+
+    let start = Math.max(currentPage - 2, 1)
+    let end = Math.min(start + maxVisible - 1, totalPages)
+
+    if (end - start < maxVisible - 1) {
+        start = Math.max(end - maxVisible + 1, 1)
     }
 
-    console.log(pages)
+    let visiblePages = []
+    for (let i = start; i <= end; i++) {
+        visiblePages.push(i)
+    }
+
 
     return (
-        <div className='container max-w-xl mx-auto'>
-            <div className="join">
-                {
-                    pages.map((page, index) => {
-                        return <button className={`join-item btn ${page == currentPage ? 'bg-primary text-white' : ''}`} key={index} onClick={() => setCurrentPage(page)}>
-                            {page}
+        <div className="w-full flex justify-center">
+            <div className="hidden md:flex join items-center">
+                <button
+                    className='join-item btn'
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(currentPage - 1)}
+                >
+                    «
+                </button>
+
+                {start > 1 && (
+                    <>
+                        <button className='join-item btn' onClick={() => setCurrentPage(1)}>1</button>
+                        {start > 2 && <span>...</span>}
+                    </>
+                )}
+
+                {visiblePages.map(page => (
+                    <button
+                        key={page}
+                        className={`join-item btn ${page === currentPage ? 'bg-primary text-white ' : ''}`}
+                        onClick={() => setCurrentPage(page)}
+                    >
+                        {page}
+                    </button>
+                ))}
+
+                {end < totalPages && (
+                    <>
+                        {end < totalPages - 1 && <span>...</span>}
+                        <button
+                            className='join-item btn'
+
+                            onClick={() => setCurrentPage(totalPages)}>
+                            {totalPages}
                         </button>
-                    })
-                }
+                    </>
+                )}
+
+                <button
+                    className='join-item btn'
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage(currentPage + 1)}
+                >
+                    »
+                </button>
+
+            </div>
+
+            <div className="join grid grid-cols-2 md:hidden">
+                <button
+                    className="join-item btn btn-outline"
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(currentPage - 1)}>
+                    Anterior
+                </button>
+                <button
+                    className="join-item btn btn-outline"
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage(currentPage + 1)}>
+                    Siguiente
+                </button>
             </div>
 
         </div>
