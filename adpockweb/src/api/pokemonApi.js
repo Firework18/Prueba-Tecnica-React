@@ -14,3 +14,8 @@ export const getAllTypes = async () => {
     const { data } = await clientAxios.get(`/type`)
     return data
 }
+
+export const getSpecieById = async (id = '') => {
+    const { data } = await clientAxios.get(`/pokemon-species/${id}`)
+    return data
+}
