@@ -8,7 +8,7 @@ export default function PokemonDetail() {
 
     const { data } = usePokemon(name)
 
-
+    console.log('prueba')
 
     return (
         <div>
