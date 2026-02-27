@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function Navbar() {
     return (
-        <div className="navbar bg-primary shadow-sm relative">
+        <div className="navbar bg-accent shadow-sm relative">
 
             {/* Izquierda */}
             <div className="navbar-start">
@@ -18,6 +18,7 @@ export default function Navbar() {
                         <li><Link to='/'>Inicio</Link></li>
                         <li><Link to='/about'>Nosotros</Link></li>
                         <li><Link to='/pokemones'>Pokemones</Link></li>
+                        <li><Link to='/blog'>Blog</Link></li>
                     </ul>
                 </div>
             </div>
@@ -34,6 +35,7 @@ export default function Navbar() {
                     <li><Link to='/'>Inicio</Link></li>
                     <li><Link to='/about'>Nosotros</Link></li>
                     <li><Link to='/pokemones'>Pokemones</Link></li>
+                    <li><Link to='/blog'>Blog</Link></li>
                 </ul>
             </div>
 
