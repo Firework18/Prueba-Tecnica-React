@@ -10,7 +10,6 @@ export default function Layout() {
         <div>
             <Navbar></Navbar>
 
-
             <Outlet />
 
             <Footer></Footer>

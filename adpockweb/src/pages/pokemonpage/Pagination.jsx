@@ -34,7 +34,7 @@ export default function Pagination({ totalPokes, pokePerPage, setCurrentPage, cu
                 {start > 1 && (
                     <>
                         <button className='join-item btn' onClick={() => setCurrentPage(1)}>1</button>
-                        {start > 2 && <span>...</span>}
+                        {start > 2 && <span className='join-item btn'>...</span>}
                     </>
                 )}
 
@@ -50,7 +50,7 @@ export default function Pagination({ totalPokes, pokePerPage, setCurrentPage, cu
 
                 {end < totalPages && (
                     <>
-                        {end < totalPages - 1 && <span>...</span>}
+                        {end < totalPages - 1 && <span className='join-item btn'>...</span>}
                         <button
                             className='join-item btn'
 

@@ -36,7 +36,7 @@ export default function PokemonCard({ pokemon }) {
                         className="rounded-xl h-50" />
                 </figure>
                 <div className="card-body items-center text-center">
-                    <h2 className="card-title">{name.toUpperCase()}</h2>
+                    <h2 className="card-title text-white">{name.toUpperCase()}</h2>
 
                     <div className='grid grid-cols-2 gap-1'>
                         {pokemonData?.types.map(type =>

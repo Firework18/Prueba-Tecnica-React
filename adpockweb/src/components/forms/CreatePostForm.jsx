@@ -4,10 +4,11 @@ import { useCreatePost } from '../../hooks/useCreatePost'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { postSchema } from '../../schemas/postSchema'
 import { toast } from 'react-toastify'
+import { da } from 'zod/v4/locales'
 
 export default function CreatePostForm() {
 
-    const { mutate, isPending, isSuccess } = useCreatePost()
+    const { data: dataCreatePost, mutate, isPending, isSuccess } = useCreatePost()
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: zodResolver(postSchema)
@@ -17,9 +18,12 @@ export default function CreatePostForm() {
         mutate(data, {
             onSuccess: () => {
                 reset()
+
             }
         })
     }
+
+
 
     return (
         <>
