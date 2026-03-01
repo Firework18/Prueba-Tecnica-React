@@ -27,7 +27,7 @@ export default function Blog() {
     return (
         <div>
             <Hero titulo={titulo} contenido={contenido} ></Hero>
-            {/* Sección Pokemones Evolucionan */}
+            {/* Sección Lista de Posts */}
             <section className='bg-primary-content'>
                 <div className='container mx-auto'>
                     <div className='text-center pt-10'>

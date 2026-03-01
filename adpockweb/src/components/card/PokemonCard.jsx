@@ -8,7 +8,7 @@ import { useSpecie } from '../../hooks/useSpecie'
 export default function PokemonCard({ pokemon }) {
 
     const { name } = pokemon
-    const { data: pokemonData } = usePokemon(name)
+    const { data: pokemonData, isLoading: isLoadingPokemon } = usePokemon(name)
     const { data: dataSpecie } = useSpecie(pokemonData?.id)
     const color = dataSpecie?.color?.name || ''
     const gradientMap = {
@@ -30,10 +30,12 @@ export default function PokemonCard({ pokemon }) {
             <div className={`card bg-linear-to-br ${gradient} shadow-sm hover:scale-105 transition-all`}>
                 <p className='text-white mt-3 badge badge-accent self-center'>ID #{pokemonData?.id}</p>
                 <figure className="px-5 pt-10">
-                    <img
-                        src={pokemonData?.sprites.other['official-artwork'].front_default}
-                        alt={name}
-                        className="rounded-xl h-50" />
+                    {isLoadingPokemon ? (
+                        <div className="skeleton h-full w-full"></div>
+                    ) : (
+                        <img
+                            src={pokemonData?.sprites.other['official-artwork'].front_default} alt={name} className="rounded-xl h-50" />
+                    )}
                 </figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title text-white">{name.toUpperCase()}</h2>

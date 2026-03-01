@@ -32,7 +32,8 @@ export default function PokemonDetail() {
     return (
         <>
             <Hero titulo={titulo} contenido={contenido}></Hero>
-            <div className=" bg-base-200 py-10 px-4 mb-10">
+            <div className=" bg-primary-content py-10 px-4 mb-10">
+                {/* Botón volver */}
                 <div className='flex justify-center items-center mb-10'>
                     <button
                         onClick={() => navigate(-1)}
@@ -69,7 +70,6 @@ export default function PokemonDetail() {
 
 
                     {/* Card de info */}
-
                     <div className='flex flex-col lg:w-1/2 gap-2'>
                         <div className={`bg-base-100 rounded-3xl p-8 w-full lg:h-3/4 shadow-xl`}>
 
@@ -91,8 +91,8 @@ export default function PokemonDetail() {
                                     </div>
                                 ))}
                             </div>
-
                         </div>
+                        {/* Habilidades del pokemon */}
                         <div className='bg-base-100 rounded-3xl p-5 w-full'>
                             <h3 className="badge badge-accent p-3 text-xl font-semibold mb-4">Habilidades</h3>
                             <div className='grid grid-cols-2 gap-2 place-self-center'>
