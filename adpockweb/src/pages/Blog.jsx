@@ -28,9 +28,9 @@ export default function Blog() {
         <div>
             <Hero titulo={titulo} contenido={contenido} ></Hero>
             {/* Sección Pokemones Evolucionan */}
-            <section>
+            <section className='bg-primary-content'>
                 <div className='container mx-auto'>
-                    <div className='text-center m-10'>
+                    <div className='text-center pt-10'>
                         <h3 className='badge badge-accent font-extrabold lg:text-2xl p-5 mb-10'>Listado de Posts</h3>
 
 

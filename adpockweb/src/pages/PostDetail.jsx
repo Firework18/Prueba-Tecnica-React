@@ -12,7 +12,7 @@ export default function PostDetail() {
     const { postId } = useParams()
 
     const { data: dataPost } = usePost(postId)
-    const { body, title, id } = dataPost ?? {}
+    const { body, title, id, userId } = dataPost ?? {}
 
     const { data: dataComments } = usePostDetail(postId)
 
@@ -31,7 +31,7 @@ export default function PostDetail() {
             <section>
                 <div className='container mx-auto'>
                     <div className='text-start m-10'>
-                        <PostDetailCard title={title} body={body} postDetailId={id}></PostDetailCard>
+                        <PostDetailCard title={title} body={body} postDetailId={id} userId={userId} key={id}></PostDetailCard>
                     </div>
                 </div>
             </section>

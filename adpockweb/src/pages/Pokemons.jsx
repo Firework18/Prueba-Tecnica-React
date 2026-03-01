@@ -35,7 +35,7 @@ export default function Pokemons() {
     const contenido = 'Accede a la Pokédex y analiza las estadísticas de tus Pokémon favoritos.'
 
     return (
-        <div>
+        <div className='bg-primary-content'>
             <Hero titulo={titulo} contenido={contenido} ></Hero>
             <div className='container mx-auto text-center'>
                 <div className='m-10'>
