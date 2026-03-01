@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { usePostDetail } from '../hooks/usePostDetail'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { usePost } from '../hooks/usePost'
 import Hero from '../sections/Hero'
 import PostCard from '../components/card/PostCard'
 import PostDetailCard from '../components/card/PostDetailCard'
 import Comments from '../sections/Comments'
+import { useComments } from '../hooks/useComments'
 
 export default function PostDetail() {
 
@@ -17,7 +17,7 @@ export default function PostDetail() {
     const { data: dataPost } = usePost(postId)
     const { body, title, id, userId } = dataPost ?? {}
 
-    const { data: dataComments } = usePostDetail(postId)
+    const { data: dataComments } = useComments(postId)
 
     console.log('data del post: ', dataPost)
     console.log('data de comentarios del post: ', dataComments)

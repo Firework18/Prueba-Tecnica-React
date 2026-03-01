@@ -14,8 +14,3 @@ export const getPostById = async (postId) => {
     const { data } = await postAxios.get(`/${postId}`)
     return data
 }
-
-export const getPostDetail = async (id) => {
-    const { data } = await postAxios.get(`/${id}/comments`)
-    return data
-}
