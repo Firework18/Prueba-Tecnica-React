@@ -3,8 +3,9 @@ import CommentBadge from '../components/ui/CommentBadge'
 import CommentCard from '../components/card/CommentCard'
 import { data } from 'react-router-dom'
 import PagSection from './PagSection'
+import SkeletonComments from '../components/ui/Skeletons/SkeletonComments'
 
-export default function Comments({ dataComments }) {
+export default function Comments({ dataComments, isLoadingComments }) {
 
     const commentData = dataComments ?? []
     const [currentPage, setCurrentPage] = useState(1)
@@ -21,14 +22,23 @@ export default function Comments({ dataComments }) {
                 <div className="w-full max-w-5xl bg-base-100 rounded-3xl shadow-xl p-8 space-y-8">
                     <h3 className='badge badge-secondary text-sm md:text-xl'>Comentarios</h3>
 
-                    <PagSection pokeData={commentData} pokePerPage={commentPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setCommentPerPage} tipo={'comentarios'} />
+                    {!isLoadingComments && (
+                        <PagSection pokeData={commentData} pokePerPage={commentPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setCommentPerPage} tipo={'comentarios'} />
 
-                    {currentComments?.map((comment) => (
-                        <CommentCard key={comment.id} comment={comment} />
-                    ))}
+                    )}
 
-                    <PagSection pokeData={commentData} pokePerPage={commentPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setCommentPerPage} tipo={'comentarios'} />
+                    {isLoadingComments
+                        ? <SkeletonComments />
+                        : currentComments?.map((comment) => (
+                            <CommentCard key={comment.id} comment={comment} />
+                        ))
+                    }
 
+
+                    {!isLoadingComments && (
+                        <PagSection pokeData={commentData} pokePerPage={commentPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setCommentPerPage} tipo={'comentarios'} />
+
+                    )}
                 </div>
 
 

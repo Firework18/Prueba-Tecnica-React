@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { data, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { usePost } from '../hooks/usePost'
 import Hero from '../sections/Hero'
 import PostCard from '../components/card/PostCard'
@@ -9,6 +9,7 @@ import Comments from '../sections/Comments'
 import { useComments } from '../hooks/useComments'
 import { is } from 'zod/v4/locales'
 import SkeletonPostDetail from '../components/ui/Skeletons/SkeletonPostDetail'
+import SkeletonComments from '../components/ui/Skeletons/SkeletonComments'
 
 export default function PostDetail() {
 
@@ -19,7 +20,7 @@ export default function PostDetail() {
     const { data: dataPost, isLoading: isLoadingPost } = usePost(postId)
     const { body, title, id, userId } = dataPost ?? {}
 
-    const { data: dataComments } = useComments(postId)
+    const { data: dataComments, isLoading: isLoadingComments } = useComments(postId)
 
     console.log('data del post: ', dataPost)
     console.log('data de comentarios del post: ', dataComments)
@@ -61,10 +62,10 @@ export default function PostDetail() {
             <section>
                 <div className="container mx-auto">
                     <div className='text-start m-10'>
-                        <Comments dataComments={dataComments} />
-
+                        <Comments dataComments={dataComments} isLoadingComments={isLoadingComments} />
                     </div>
                 </div>
+
             </section>
         </div>
     )
