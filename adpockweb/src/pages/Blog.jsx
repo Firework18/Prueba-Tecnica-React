@@ -28,7 +28,7 @@ export default function Blog() {
         <div>
             <Hero titulo={titulo} contenido={contenido} ></Hero>
             {/* Sección Lista de Posts */}
-            <section className='bg-primary-content'>
+            <section className='bg-base-300'>
                 <div className='container mx-auto'>
                     <div className='text-center pt-10'>
                         <h3 className='badge badge-accent font-extrabold lg:text-2xl p-5 mb-10'>Listado de Posts</h3>

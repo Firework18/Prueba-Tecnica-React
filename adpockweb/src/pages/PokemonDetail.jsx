@@ -32,7 +32,7 @@ export default function PokemonDetail() {
     return (
         <>
             <Hero titulo={titulo} contenido={contenido}></Hero>
-            <div className=" bg-primary-content py-10 px-4 mb-10">
+            <div className=" bg-base-300 py-10 px-4 mb-20">
                 {/* Botón volver */}
                 <div className='flex justify-center items-center mb-10'>
                     <button

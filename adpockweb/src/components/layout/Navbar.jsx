@@ -9,7 +9,7 @@ export default function Navbar() {
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle lg:hidden">
-                        <i className="bi bi-list text-white"></i>
+                        <i className="bi bi-list "></i>
                     </div>
 
                     <ul
@@ -31,7 +31,7 @@ export default function Navbar() {
 
             {/* Derecha */}
             <div className="navbar-end hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 font-bold text-white">
+                <ul className="menu menu-horizontal px-1 font-bold ">
                     <li><Link to='/'>Inicio</Link></li>
                     <li><Link to='/about'>Nosotros</Link></li>
                     <li><Link to='/pokemones'>Pokemones</Link></li>

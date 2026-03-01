@@ -3,7 +3,7 @@ import { useUser } from '../../hooks/useUser'
 import { usePokemon } from '../../hooks/usePokemon'
 import CommentBadge from '../ui/CommentBadge'
 
-export default function PostDetailCard({ title, body, postDetailId, userId }) {
+export default function PostDetailCard({ title, body, userId }) {
 
     const { data: dataUser } = useUser(userId)
     const { name, username } = dataUser ?? {}
@@ -37,13 +37,15 @@ export default function PostDetailCard({ title, body, postDetailId, userId }) {
 
                 {/* Imagen */}
                 <div className="flex justify-center">
-                    <div className="bg-base-200 p-6 rounded-3xl shadow-md">
+                    <div className="bg-base-200 p-4 sm:p-6 rounded-3xl shadow-md w-full max-w-sm flex justify-center">
                         {isLoadingPoke ? (
-                            <div className="w-72 h-72 flex items-center justify-center">
-                                <div className="skeleton h-full w-full"></div>
-                            </div>
+                            <div className="skeleton w-full max-w-62.5 aspect-square rounded-2xl"></div>
                         ) : (
-                            <img src={front_default} alt="Pokemon" className="w-72 h-72 object-contain transition-transform duration-300 hover:scale-105" />
+                            <img
+                                src={front_default}
+                                alt="Pokemon"
+                                className="w-full max-w-62.5 sm:max-w-[288px] aspect-square object-contain transition-transform duration-300 hover:scale-105"
+                            />
                         )}
                     </div>
                 </div>

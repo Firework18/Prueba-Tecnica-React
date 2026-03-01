@@ -7,6 +7,8 @@ import PostCard from '../components/card/PostCard'
 import PostDetailCard from '../components/card/PostDetailCard'
 import Comments from '../sections/Comments'
 import { useComments } from '../hooks/useComments'
+import { is } from 'zod/v4/locales'
+import SkeletonPostDetail from '../components/ui/Skeletons/SkeletonPostDetail'
 
 export default function PostDetail() {
 
@@ -14,7 +16,7 @@ export default function PostDetail() {
 
     const navigate = useNavigate()
 
-    const { data: dataPost } = usePost(postId)
+    const { data: dataPost, isLoading: isLoadingPost } = usePost(postId)
     const { body, title, id, userId } = dataPost ?? {}
 
     const { data: dataComments } = useComments(postId)
@@ -34,18 +36,23 @@ export default function PostDetail() {
                 <button
                     onClick={() => navigate(-1)}
                     className='btn btn-secondary flex flex-row justify-center text-center items-center gap-2'>
-                    <i class="bi bi-arrow-left-circle"></i>
+                    <i className="bi bi-arrow-left-circle"></i>
                     <p className='text-center my-5'>Volver</p>
                 </button>
             </div>
 
+
+
             {/* Seccion Detalle del Post */}
             <section>
-                <div className='container mx-auto'>
-                    <div className='text-start m-10'>
-                        <PostDetailCard title={title} body={body} postDetailId={id} userId={userId} key={id}></PostDetailCard>
+                {isLoadingPost ? <SkeletonPostDetail></SkeletonPostDetail> :
+                    <div className='container mx-auto'>
+                        <div className='text-start m-10'>
+                            <PostDetailCard title={title} body={body} postDetailId={id} userId={userId} key={id}></PostDetailCard>
+                        </div>
                     </div>
-                </div>
+                }
+
             </section>
 
 
