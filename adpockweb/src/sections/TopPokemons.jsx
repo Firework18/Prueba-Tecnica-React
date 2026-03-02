@@ -20,7 +20,7 @@ export default function TopPokemons() {
             </div>
 
             {error && (
-                <ErrorCard></ErrorCard>
+                <ErrorCard error={error}></ErrorCard>
             )}
 
             <div className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 sm:gap-10 lg:gap-20'>

@@ -4,6 +4,7 @@ import { usePokemon } from '../hooks/usePokemon'
 import Attributte from '../components/ui/Attributte'
 import { useSpecie } from '../hooks/useSpecie'
 import Hero from '../sections/Hero'
+import { changeColorCard } from '../helpers/changeColorCard'
 
 export default function PokemonDetail() {
     const navigate = useNavigate()
@@ -11,20 +12,7 @@ export default function PokemonDetail() {
     const { data } = usePokemon(name)
     const { data: dataSpecie } = useSpecie(data?.id)
     const color = dataSpecie?.color?.name || ''
-    const gradientMap = {
-        red: "from-red-200 to-red-700",
-        blue: "from-blue-200 to-blue-700",
-        green: "from-green-200 to-green-700",
-        yellow: "from-yellow-200 to-yellow-600",
-        purple: "from-purple-200 to-purple-700",
-        pink: "from-pink-200 to-pink-600",
-        brown: "from-amber-200 to-amber-800",
-        black: "from-gray-200 to-gray-950",
-        gray: "from-gray-400 to-gray-600",
-        white: "from-gray-200 to-gray-400"
-    }
-
-    const gradient = gradientMap[color] || "from-indigo-500 to-indigo-700"
+    const gradient = changeColorCard(color)
 
     const titulo = 'Explora las estadísticas y movimientos'
     const contenido = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia architecto'

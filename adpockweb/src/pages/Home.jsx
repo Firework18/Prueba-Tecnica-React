@@ -18,7 +18,7 @@ export default function Home() {
             <section className='bg-base-300'>
                 <div className='container mx-auto'>
                     <div className='text-center mx-10 py-10'>
-                        <h3 className='badge badge-accent font-extrabold lg:text-2xl p-5 mb-10'>Tus pokemones pueden evolucionar</h3>
+                        <h3 className='badge badge-accent font-extrabold lg:text-2xl p-5 mb-10'>Mira sus evoluciones</h3>
                         <TopPokemons />
                     </div>
                 </div>
@@ -28,7 +28,7 @@ export default function Home() {
             <section className='bg-info-content'>
                 <div className='container mx-auto py-5'>
                     <div className='text-center m-10'>
-                        <h3 className='badge badge-secondary font-extrabold lg:text-2xl p-5 mb-10'>Explora por tipo</h3>
+                        <h3 className='badge badge-secondary font-extrabold lg:text-2xl p-5 mb-10'>Descubre tu tipo</h3>
                         <TypePokemons />
                     </div>
                 </div>

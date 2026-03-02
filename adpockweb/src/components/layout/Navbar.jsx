@@ -4,7 +4,7 @@ import DarkModeToggle from '../ui/DarkModeToggle'
 
 export default function Navbar() {
     return (
-        <div className="navbar bg-primary shadow-sm relative">
+        <div className="navbar bg-secondary shadow-sm relative text-white">
 
             {/* Izquierda */}
             <div className="navbar-start">
@@ -30,11 +30,15 @@ export default function Navbar() {
                 </Link>
             </div>
 
+            <div className="navbar-end lg:hidden">
+                <DarkModeToggle></DarkModeToggle>
+
+            </div>
 
 
             {/* Derecha */}
             <div className="navbar-end hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 font-bold ">
+                <ul className="menu menu-horizontal justify-center items-center text-xs">
                     <DarkModeToggle></DarkModeToggle>
                     <li><Link to='/'>Inicio</Link></li>
                     <li><Link to='/about'>Nosotros</Link></li>

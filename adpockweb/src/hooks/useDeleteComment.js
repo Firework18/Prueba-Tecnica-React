@@ -12,9 +12,9 @@ export const useDeleteComment = (postId) => {
             // Actualizar localStorage
             const stored =
                 JSON.parse(localStorage.getItem(`comments-${postId}`)) || []
-
+            // Filtrar el comentario eliminado
             const filtered = stored.filter(c => c.id !== deletedId)
-
+            // Guardar el nuevo array de comentarios en el LocalStorage
             localStorage.setItem(
                 `comments-${postId}`,
                 JSON.stringify(filtered)

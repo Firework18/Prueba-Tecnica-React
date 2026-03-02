@@ -10,7 +10,9 @@ import ErrorAlert from '../components/ui/ErrorAlert'
 
 export default function Comments({ postId }) {
 
-    const { data: dataComments, isLoading: isLoadingComments, isError: isErrorComments } = useComments(postId)
+    const id = postId ?? 0
+
+    const { data: dataComments, isLoading: isLoadingComments, isError: isErrorComments } = useComments(id)
 
     const commentData = dataComments ?? []
     const [currentPage, setCurrentPage] = useState(1)

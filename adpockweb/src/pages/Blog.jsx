@@ -22,8 +22,8 @@ export default function Blog() {
 
     const currentPost = postData.slice(firstPostIndex, lastPostIndex)
 
-    const titulo = 'Lorem ipsum dolor sit amet'
-    const contenido = 'amet consectetur adipisicing elit. Mollitia architecto veniam expedita'
+    const titulo = 'Descubre los secretos detrás de cada movimiento'
+    const contenido = 'Explora estadísticas, haz preguntas y entiende cómo cada detalle afecta los resultados.'
 
     return (
         <div>

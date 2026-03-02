@@ -21,7 +21,7 @@ export default function TypePokemons() {
             </div>
 
             {error && (
-                <ErrorCard></ErrorCard>
+                <ErrorCard error={error}></ErrorCard>
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center md:mx-60">

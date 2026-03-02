@@ -3,7 +3,7 @@ import React from 'react'
 export default function Skeleton() {
     return (
         <div>
-            <div className="card bg-primary-content shadow-sm hover:scale-105 transition-all pb-5">
+            <div className="card bg-base-100 shadow-sm hover:scale-105 transition-all pb-5">
                 <figure className="px-5 pt-10">
                     <div className="skeleton w-50 h-50"></div>
                 </figure>

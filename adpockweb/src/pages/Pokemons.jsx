@@ -7,6 +7,7 @@ import ErrorCard from '../components/ui/ErrorCard'
 import NotFoundCard from '../components/ui/NotFoundCard'
 import Pagination from './pokemonpage/Pagination'
 import PagSection from '../sections/PagSection'
+import ErrorAlert from '../components/ui/ErrorAlert'
 
 export default function Pokemons() {
 
@@ -41,6 +42,11 @@ export default function Pokemons() {
                 <div className='m-10'>
 
                     <h1 className='my-10'><p className='badge bg-red-600 rounded-sm sm:text-1xl md:text-2xl font-extrabold p-5 text-white'>Nuestros Pokemones</p></h1>
+
+                    {error && (
+                        <ErrorAlert error={error} />
+                    )}
+
                     {/* Busqueda de Pokemones - Dinámico */}
                     <div className="gap-2 mb-10 flex flex-col justify-center ">
                         <div className='self-center'>Introduzca su búsqueda: </div>
@@ -55,9 +61,11 @@ export default function Pokemons() {
                             <div className="validator-hint hidden">Ingresa un nombre válido</div>
                         </div>
                     </div>
-
                     {/* Paginacion */}
-                    <PagSection pokeData={pokeData} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setPokePerPage} tipo={'pokémones'} />
+                    {!error && !isLoading && (
+                        <PagSection pokeData={pokeData} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setPokePerPage} tipo={'pokémones'} />
+                    )}
+
 
                     {/* Card de carga */}
                     <div className='grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 sm:gap-10 lg:gap-20'>
@@ -68,7 +76,7 @@ export default function Pokemons() {
 
                     {/* Card de error */}
                     {error && (
-                        <ErrorCard></ErrorCard>
+                        <ErrorCard error={error}></ErrorCard>
                     )}
 
                     {/* Card de No encontrado */}
@@ -84,8 +92,9 @@ export default function Pokemons() {
                     </div>
 
                     {/* Paginacion */}
-                    <PagSection pokeData={pokeData} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setPokePerPage} />
-
+                    {!error && !isLoading && (
+                        <PagSection pokeData={pokeData} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setPokePerPage} tipo={'pokémones'} />
+                    )}
                 </div>
 
 
