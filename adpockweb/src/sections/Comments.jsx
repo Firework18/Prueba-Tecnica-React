@@ -6,10 +6,11 @@ import PagSection from './PagSection'
 import SkeletonComments from '../components/ui/Skeletons/SkeletonComments'
 import CreateCommentForm from '../components/forms/CreateCommentForm'
 import { useComments } from '../hooks/useComments'
+import ErrorAlert from '../components/ui/ErrorAlert'
 
 export default function Comments({ postId }) {
 
-    const { data: dataComments, isLoading: isLoadingComments } = useComments(postId)
+    const { data: dataComments, isLoading: isLoadingComments, isError: isErrorComments } = useComments(postId)
 
     const commentData = dataComments ?? []
     const [currentPage, setCurrentPage] = useState(1)
@@ -20,37 +21,58 @@ export default function Comments({ postId }) {
 
     const currentComments = commentData?.slice(firstCommentIndex, lastCommentIndex)
 
+    if (isErrorComments) {
+        return (
+            <div className='flex justify-center'>
+                <div className='w-full max-w-5xl bg-base-100 rounded-3xl shadow-xl p-8'>
+                    <ErrorAlert error={isErrorComments} />
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className='flex justify-center'>
-            <div className='space-y-4'>
-                <div className="w-full max-w-5xl bg-base-100 rounded-3xl shadow-xl p-8 space-y-8">
-                    <h3 className='badge badge-secondary text-sm md:text-xl'>Comentarios</h3>
+            <div className='w-full max-w-5xl bg-base-100 rounded-3xl shadow-xl p-8 space-y-8'>
+                <h3 className='badge badge-secondary text-sm md:text-xl'>Comentarios</h3>
 
-                    <CreateCommentForm postId={postId} />
+                <CreateCommentForm postId={postId} />
 
-                    {currentComments?.length > 0 && !isLoadingComments && (
-                        <PagSection pokeData={commentData} pokePerPage={commentPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setCommentPerPage} tipo={'comentarios'} />
+                {currentComments.length > 0 && !isLoadingComments && (
+                    <PagSection
+                        pokeData={dataComments}
+                        pokePerPage={commentPerPage}
+                        setCurrentPage={setCurrentPage}
+                        currentPage={currentPage}
+                        setPokePerPage={setCommentPerPage}
+                        tipo="comentarios"
+                    />
+                )}
 
-                    )}
+                {isLoadingComments && <SkeletonComments />}
 
-                    {isLoadingComments
-                        ? <SkeletonComments />
-                        : currentComments?.map((comment) => (
-                            <CommentCard key={comment.id} comment={comment} postId={postId} />
-                        ))
-                    }
+                {!isLoadingComments && currentComments.length > 0 && (
+                    currentComments.map(comment => (
+                        <CommentCard key={comment.id} comment={comment} postId={postId} />
+                    ))
+                )}
 
-                    {currentComments?.length === 0 && !isLoadingComments && (
-                        <p className='text-center text-gray-500'>No hay comentarios aún. ¡Sé el primero en comentar!</p>
-                    )}
+                {!isLoadingComments && currentComments.length === 0 && (
+                    <p className='text-center text-gray-500'>
+                        No hay comentarios aún. ¡Sé el primero en comentar!
+                    </p>
+                )}
 
-                    {currentComments?.length > 0 && !isLoadingComments && (
-                        <PagSection pokeData={commentData} pokePerPage={commentPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setCommentPerPage} tipo={'comentarios'} />
-
-                    )}
-                </div>
-
-
+                {currentComments.length > 0 && !isLoadingComments && (
+                    <PagSection
+                        pokeData={dataComments}
+                        pokePerPage={commentPerPage}
+                        setCurrentPage={setCurrentPage}
+                        currentPage={currentPage}
+                        setPokePerPage={setCommentPerPage}
+                        tipo="comentarios"
+                    />
+                )}
             </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import DarkModeToggle from '../ui/DarkModeToggle'
 
 export default function Navbar() {
     return (
@@ -29,9 +30,12 @@ export default function Navbar() {
                 </Link>
             </div>
 
+
+
             {/* Derecha */}
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 font-bold ">
+                    <DarkModeToggle></DarkModeToggle>
                     <li><Link to='/'>Inicio</Link></li>
                     <li><Link to='/about'>Nosotros</Link></li>
                     <li><Link to='/pokemones'>Pokemones</Link></li>

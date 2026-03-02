@@ -8,7 +8,7 @@ import { da } from 'zod/v4/locales'
 
 export default function CreatePostForm() {
 
-    const { mutate, isPending, isSuccess } = useCreatePost()
+    const { mutate, isPending } = useCreatePost()
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: zodResolver(postSchema)
@@ -17,7 +17,11 @@ export default function CreatePostForm() {
     const onSubmit = (data) => {
         mutate(data, {
             onSuccess: () => {
+                toast.success('Post creado correctamente')
                 reset()
+            },
+            onError: (error) => {
+                toast.error(getErrorMessage(error))
             }
         })
     }
@@ -30,9 +34,6 @@ export default function CreatePostForm() {
                 </h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    {isSuccess && (
-                        <p className='badge badge-success'>Enviado Correctamente</p>
-                    )}
                     <div>
                         <input type="text" placeholder="Título" className="input input-bordered w-full"
                             {...register("title")} />

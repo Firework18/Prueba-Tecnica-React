@@ -19,6 +19,9 @@ export default function UpdateCommentForm({ comment, postId, setIsEditing }) {
                 toast.success('Comentario actualizado')
                 setIsEditing(false)
                 reset()
+            },
+            onError: (error) => {
+                toast.error(getErrorMessage(error))
             }
         })
 

@@ -10,6 +10,7 @@ import { useComments } from '../hooks/useComments'
 import { is } from 'zod/v4/locales'
 import SkeletonPostDetail from '../components/ui/Skeletons/SkeletonPostDetail'
 import SkeletonComments from '../components/ui/Skeletons/SkeletonComments'
+import ErrorAlert from '../components/ui/ErrorAlert'
 
 export default function PostDetail() {
 
@@ -17,10 +18,10 @@ export default function PostDetail() {
 
     const navigate = useNavigate()
 
-    const { data: dataPost, isLoading: isLoadingPost } = usePost(postId)
+    const { data: dataPost, isLoading: isLoadingPost, isError: isErrorPost } = usePost(postId)
     const { body, title, id, userId } = dataPost ?? {}
 
-    const { data: dataComments, isLoading: isLoadingComments } = useComments(postId)
+    const { data: dataComments, isLoading: isLoadingComments, isError: isErrorComments } = useComments(postId)
 
     console.log('data del post: ', dataPost)
     console.log('data de comentarios del post: ', dataComments)
@@ -42,14 +43,16 @@ export default function PostDetail() {
                 </button>
             </div>
 
-
+            {!isLoadingPost && isErrorPost && (
+                <ErrorAlert error={isErrorPost} />
+            )}
 
             {/* Seccion Detalle del Post */}
             <section>
                 {isLoadingPost ? <SkeletonPostDetail></SkeletonPostDetail> :
                     <div className='container mx-auto'>
                         <div className='text-start m-10'>
-                            <PostDetailCard title={title} body={body} postDetailId={id} userId={userId} key={id}></PostDetailCard>
+                            <PostDetailCard title={title} body={body} postDetailId={id} userId={userId} isErrorPost={isErrorPost} key={id}></PostDetailCard>
                         </div>
                     </div>
                 }

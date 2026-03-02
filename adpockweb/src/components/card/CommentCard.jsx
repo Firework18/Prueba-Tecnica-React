@@ -9,20 +9,22 @@ import { commentSchema } from '../../schemas/commentSchema'
 
 export default function CommentCard({ comment, postId }) {
 
+    const dataComment = comment ?? {}
+
     const { mutate: deleteComment, isPending: isDeleting } = useDeleteComment(postId)
     const { mutate: updateComment, isPending: isUpdating } = useUpdateComment(postId)
 
     const { register, reset, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(commentSchema),
         defaultValues: {
-            body: comment.body
+            body: dataComment?.body
         }
     })
 
     const [isEditing, setIsEditing] = useState(false)
 
     const onSubmit = (data) => {
-        updateComment({ id: comment.id, ...data }, {
+        updateComment({ id: dataComment.id, ...data }, {
             onSuccess: () => {
                 toast.success('Comentario actualizado')
                 setIsEditing(false)
@@ -33,12 +35,12 @@ export default function CommentCard({ comment, postId }) {
     }
 
     const handleDelete = () => {
-        deleteComment(comment.id)
+        deleteComment(dataComment.id)
         toast.success('Comentario eliminado')
     }
     return (
         <div>
-            <CommentBadge name={comment.email?.split('@')[0] || 'usuario'} />
+            <CommentBadge name={dataComment.email?.split('@')[0] || 'usuario'} />
 
             <div className='bg-base-200 p-6 rounded-2xl leading-relaxed text-gray-700 shadow-inner text-xs md:text-sm'>
 
@@ -76,9 +78,9 @@ export default function CommentCard({ comment, postId }) {
                     </>
                 ) : (
                     <>
-                        {comment.body}
+                        {dataComment.body}
 
-                        <div className="flex gap-2 mt-3">
+                        <div className="flex gap-2 mt-3 ">
                             <button
                                 className="btn btn-warning btn-sm"
                                 onClick={() => setIsEditing(true)}

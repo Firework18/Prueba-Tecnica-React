@@ -3,7 +3,7 @@ import { useUser } from '../../hooks/useUser'
 import { usePokemon } from '../../hooks/usePokemon'
 import CommentBadge from '../ui/CommentBadge'
 
-export default function PostDetailCard({ title, body, userId }) {
+export default function PostDetailCard({ title, body, userId, isErrorPost }) {
 
     const { data: dataUser } = useUser(userId)
     const { name, username } = dataUser ?? {}
@@ -11,7 +11,7 @@ export default function PostDetailCard({ title, body, userId }) {
     // Generar un ID aleatorio para obtener un Pokémon diferente cada vez
     const randomId = Math.floor(Math.random() * 1025) + 1
 
-    const { data: dataPoke, isLoading: isLoadingPoke } = usePokemon(`/${randomId}`)
+    const { data: dataPoke, isLoading: isLoadingPoke, isError: isErrorPoke, isSuccess: isSuccessPoke } = usePokemon(`/${randomId}`)
     const { front_default } = dataPoke?.sprites.other['official-artwork'] ?? {}
 
     return (
@@ -38,15 +38,28 @@ export default function PostDetailCard({ title, body, userId }) {
                 {/* Imagen */}
                 <div className="flex justify-center">
                     <div className="bg-base-200 p-4 sm:p-6 rounded-3xl shadow-md w-full max-w-sm flex justify-center">
-                        {isLoadingPoke ? (
+                        {isLoadingPoke && (
                             <div className="skeleton w-full max-w-62.5 aspect-square rounded-2xl"></div>
-                        ) : (
+                        )}
+
+                        {(isErrorPoke || isErrorPost) && (
                             <img
-                                src={front_default}
-                                alt="Pokemon"
-                                className="w-full max-w-62.5 sm:max-w-[288px] aspect-square object-contain transition-transform duration-300 hover:scale-105"
+                                src="/img/error-imagen.jpg"
+                                alt="Pokemon-Error"
+                                className="w-full max-w-62.5 sm:max-w-[288px] aspect-square object-contain transition-transform duration-300 hover:scale-105 rounded-2xl"
                             />
                         )}
+
+                        {
+                            isSuccessPoke && !isErrorPost && (
+                                <img
+                                    src={front_default}
+                                    alt="Pokemon"
+                                    className="w-full max-w-62.5 sm:max-w-[288px] aspect-square object-contain transition-transform duration-300 hover:scale-105 rounded-2xl"
+                                />
+                            )
+                        }
+
                     </div>
                 </div>
 

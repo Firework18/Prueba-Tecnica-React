@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createPost } from "../api/postApi"
+import { set } from "zod"
 
 export const useCreatePost = () => {
     const queryClient = useQueryClient()
@@ -29,6 +30,6 @@ export const useCreatePost = () => {
                 'createdPosts',
                 JSON.stringify([postToAdd, ...storedCreated])
             )
-        }
+        },
     })
 }

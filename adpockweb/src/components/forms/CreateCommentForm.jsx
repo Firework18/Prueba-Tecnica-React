@@ -21,7 +21,7 @@ export default function CreateCommentForm({ postId }) {
             }
             ,
             onError: (error) => {
-                toast.error(error?.response?.data?.message || 'Error al enviar el comentario')
+                toast.error(getErrorMessage(error))
             }
         })
     }
