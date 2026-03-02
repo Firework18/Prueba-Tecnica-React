@@ -4,8 +4,12 @@ import CommentCard from '../components/card/CommentCard'
 import { data } from 'react-router-dom'
 import PagSection from './PagSection'
 import SkeletonComments from '../components/ui/Skeletons/SkeletonComments'
+import CreateCommentForm from '../components/forms/CreateCommentForm'
+import { useComments } from '../hooks/useComments'
 
-export default function Comments({ dataComments, isLoadingComments }) {
+export default function Comments({ postId }) {
+
+    const { data: dataComments, isLoading: isLoadingComments } = useComments(postId)
 
     const commentData = dataComments ?? []
     const [currentPage, setCurrentPage] = useState(1)
@@ -22,7 +26,9 @@ export default function Comments({ dataComments, isLoadingComments }) {
                 <div className="w-full max-w-5xl bg-base-100 rounded-3xl shadow-xl p-8 space-y-8">
                     <h3 className='badge badge-secondary text-sm md:text-xl'>Comentarios</h3>
 
-                    {!isLoadingComments && (
+                    <CreateCommentForm postId={postId} />
+
+                    {currentComments?.length > 0 && !isLoadingComments && (
                         <PagSection pokeData={commentData} pokePerPage={commentPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setCommentPerPage} tipo={'comentarios'} />
 
                     )}
@@ -30,12 +36,15 @@ export default function Comments({ dataComments, isLoadingComments }) {
                     {isLoadingComments
                         ? <SkeletonComments />
                         : currentComments?.map((comment) => (
-                            <CommentCard key={comment.id} comment={comment} />
+                            <CommentCard key={comment.id} comment={comment} postId={postId} />
                         ))
                     }
 
+                    {currentComments?.length === 0 && !isLoadingComments && (
+                        <p className='text-center text-gray-500'>No hay comentarios aún. ¡Sé el primero en comentar!</p>
+                    )}
 
-                    {!isLoadingComments && (
+                    {currentComments?.length > 0 && !isLoadingComments && (
                         <PagSection pokeData={commentData} pokePerPage={commentPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} setPokePerPage={setCommentPerPage} tipo={'comentarios'} />
 
                     )}

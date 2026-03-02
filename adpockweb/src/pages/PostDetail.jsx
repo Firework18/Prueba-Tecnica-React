@@ -62,7 +62,7 @@ export default function PostDetail() {
             <section>
                 <div className="container mx-auto">
                     <div className='text-start m-10'>
-                        <Comments dataComments={dataComments} isLoadingComments={isLoadingComments} />
+                        <Comments postId={id} />
                     </div>
                 </div>
 

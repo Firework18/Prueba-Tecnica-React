@@ -8,7 +8,7 @@ import { da } from 'zod/v4/locales'
 
 export default function CreatePostForm() {
 
-    const { data: dataCreatePost, mutate, isPending, isSuccess } = useCreatePost()
+    const { mutate, isPending, isSuccess } = useCreatePost()
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: zodResolver(postSchema)
@@ -18,12 +18,9 @@ export default function CreatePostForm() {
         mutate(data, {
             onSuccess: () => {
                 reset()
-
             }
         })
     }
-
-
 
     return (
         <>

@@ -10,16 +10,15 @@ export default function Blog() {
 
     const { data } = usePosts()
 
-    console.log(data?.length)
-
     const postData = data ?? []
+
     const [currentPage, setCurrentPage] = useState(1)
     const [postPerPage, setPostPerPage] = useState(8)
 
     const lastPostIndex = currentPage * postPerPage
     const firstPostIndex = lastPostIndex - postPerPage
 
-    const currentPost = postData?.slice(firstPostIndex, lastPostIndex)
+    const currentPost = postData.slice(firstPostIndex, lastPostIndex)
 
     const titulo = 'Lorem ipsum dolor sit amet'
     const contenido = 'amet consectetur adipisicing elit. Mollitia architecto veniam expedita'

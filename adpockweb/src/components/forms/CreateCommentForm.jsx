@@ -1,6 +1,33 @@
 import React from 'react'
+import { useCreateComment } from '../../hooks/useCreateComment'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { commentSchema } from '../../schemas/commentSchema'
+import { toast } from 'react-toastify'
 
-export default function CreateCommentForm() {
+export default function CreateCommentForm({ postId }) {
+
+    const { data: dataCreateComment, mutate, isPending, isSuccess } = useCreateComment(postId)
+
+    const { register, reset, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(commentSchema)
+    })
+
+    const onSubmit = (data) => {
+        mutate(data, {
+            onSuccess: () => {
+                toast.success('Comentario añadido correctamente')
+                reset()
+            }
+            ,
+            onError: (error) => {
+                toast.error(error?.response?.data?.message || 'Error al enviar el comentario')
+            }
+        })
+    }
+
+    console.log('Data del comentario creado: ', dataCreateComment)
+
     return (
         <div>
             <div className="max-w-xl mx-auto bg-base-200 p-6 rounded-2xl shadow-md">
@@ -9,10 +36,6 @@ export default function CreateCommentForm() {
                 </h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    {isSuccess && (
-                        <p className='badge badge-success'>Comentario añadido correctamente</p>
-                    )}
-
                     <div>
                         <textarea placeholder="Contenido" className="textarea textarea-bordered w-full" rows="4"
                             {...register("body")} />
