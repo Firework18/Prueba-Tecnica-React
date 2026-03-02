@@ -1,0 +1,75 @@
+import React from 'react'
+
+import { data, Navigate, useNavigate, useParams } from 'react-router-dom'
+import { usePost } from '../hooks/usePost'
+import Hero from '../../../sections/Hero'
+import PostCard from '../components/cards/PostCard'
+import PostDetailCard from '../components/cards/PostDetailCard'
+import Comments from '../../comments/components/sections/Comments'
+import { useComments } from '../../comments/hooks/useComments'
+import { is } from 'zod/v4/locales'
+import SkeletonPostDetail from '../../../shared/ui/Skeletons/SkeletonPostDetail'
+import SkeletonComments from '../../../shared/ui/Skeletons/SkeletonComments'
+import ErrorAlert from '../../../shared/ui/ErrorAlert'
+
+export default function PostDetail() {
+
+    const { postId } = useParams()
+
+    const navigate = useNavigate()
+
+    const { data: dataPost, isLoading: isLoadingPost, isError: isErrorPost } = usePost(postId)
+    const { body, title, id, userId } = dataPost ?? {}
+
+    const { data: dataComments, isLoading: isLoadingComments, isError: isErrorComments } = useComments(postId)
+
+    console.log('data del post: ', dataPost)
+    console.log('data de comentarios del post: ', dataComments)
+
+    const titulo = 'Explora el mundo Pokémon'
+    const contenido = 'Descubre información esencial de cada Pokémon y comienza tu aventura como entrenador.'
+
+    return (
+        <div className='mb-10'>
+
+            <Hero titulo={titulo} contenido={contenido}></Hero>
+
+            <div className='flex justify-center items-center mb-10 mt-10'>
+                <button
+                    onClick={() => navigate(-1)}
+                    className='btn btn-secondary flex flex-row justify-center text-center items-center gap-2'>
+                    <i className="bi bi-arrow-left-circle"></i>
+                    <p className='text-center my-5'>Volver</p>
+                </button>
+            </div>
+
+            {!isLoadingPost && isErrorPost && (
+                <ErrorAlert error={isErrorPost} />
+            )}
+
+            {/* Seccion Detalle del Post */}
+            <section>
+                {isLoadingPost ? <SkeletonPostDetail></SkeletonPostDetail> :
+                    <div className='container mx-auto'>
+                        <div className='text-start m-10'>
+                            <PostDetailCard title={title} body={body} postDetailId={id} userId={userId} isErrorPost={isErrorPost} key={id}></PostDetailCard>
+                        </div>
+                    </div>
+                }
+
+            </section>
+
+
+            {/* Seccion comentarios */}
+
+            <section>
+                <div className="container mx-auto">
+                    <div className='text-start m-10'>
+                        <Comments postId={id} />
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    )
+}

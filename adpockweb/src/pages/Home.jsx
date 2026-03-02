@@ -1,8 +1,8 @@
 import React from 'react'
 import Hero from '../sections/Hero'
-import TopPokemons from '../sections/TopPokemons'
-import TypeCard from '../components/card/TypeCard'
-import TypePokemons from '../sections/TypePokemons'
+import TopPokemons from '../features/pokemons/components/sections/TopPokemons'
+import TypeCard from '../features/pokemons/components/cards/TypeCard'
+import TypePokemons from '../features/pokemons/components/sections/TypePokemons'
 
 export default function Home() {
 
