@@ -5,31 +5,37 @@ export const useUpdateComment = (postId) => {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: ({ id, body }) => updateComment(id, body),
+        mutationFn: async ({ id, body }) => {
+            // Si es comentario fake/local, NO llamar API
+            if (id > 500) {
+                return { id, body }
+            }
+
+            // Si es comentario real, llamar API
+            return await updateComment(id, body)
+        },
 
         onSuccess: (updatedComment) => {
-            // Obtener los comentarios almacenados localmente para este post
-            const stored =
-                JSON.parse(localStorage.getItem(`comments-${postId}`)) || []
-
-            const updatedStored = stored.map(c =>
-                c.id === updatedComment.id
-                    ? { ...c, ...updatedComment }
-                    : c
-            )
-            // Guardar el array actualizado de comentarios en el LocalStorage
-            localStorage.setItem(
-                `comments-${postId}`,
-                JSON.stringify(updatedStored)
-            )
-
-            // Actualizar cache de React Query
-            queryClient.setQueryData(['comments', postId], (old = []) =>
-                old.map(c =>
+            // El stored contiene los comentarios del post en local storage 
+            const stored = JSON.parse(localStorage.getItem(`comments-${postId}`)) || []
+            // Función para actualizar el comentario tanto en localStorage como en cache
+            const updateLogic = (comments = []) =>
+                comments.map(c =>
                     c.id === updatedComment.id
                         ? { ...c, ...updatedComment }
                         : c
                 )
+
+            // Actualizar localStorage
+            localStorage.setItem(
+                `comments-${postId}`,
+                JSON.stringify(updateLogic(stored))
+            )
+
+            // Actualizar cache
+            queryClient.setQueryData(
+                ['comments', postId],
+                updateLogic
             )
         }
     })

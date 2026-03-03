@@ -8,7 +8,7 @@ export default function Filter({ pokeData, pokePerPage, setCurrentPage, currentP
                 <Pagination totalPokes={pokeData?.length} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
                 <div className='flex flex-col md:flex-row gap-5 mt-5 items-center justify-center'>
                     <div className='badge badge-secondary'>Filtrar por</div>
-                    <select name="filtrar" value={pokePerPage}
+                    <select name="filtrar" value={pokePerPage} className='bg-base-300'
                         onChange={(e) => {
                             setPokePerPage(Number(e.target.value))
                             setCurrentPage(1)

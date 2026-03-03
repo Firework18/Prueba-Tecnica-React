@@ -14,7 +14,7 @@ export default function CreateCommentForm({ postId }) {
     })
 
     const onSubmit = (data) => {
-        mutate(data, {
+        mutate(data.body, {
             onSuccess: () => {
                 toast.success('Comentario añadido correctamente')
                 reset()

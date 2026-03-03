@@ -49,6 +49,7 @@ export default function UpdateCommentForm({ comment, postId, setIsEditing }) {
                     </button>
 
                     <button
+                        type='button'
                         className="btn btn-ghost btn-sm"
                         onClick={() => setIsEditing(false)}
                     >

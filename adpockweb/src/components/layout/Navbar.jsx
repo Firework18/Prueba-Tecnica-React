@@ -15,7 +15,7 @@ export default function Navbar() {
 
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content bg-secondary rounded-box z-10 mt-3 w-52 p-2 shadow">
                         <li><Link to='/'>Inicio</Link></li>
                         <li><Link to='/about'>Nosotros</Link></li>
                         <li><Link to='/pokemones'>Pokemones</Link></li>

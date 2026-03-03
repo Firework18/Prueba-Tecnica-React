@@ -15,7 +15,7 @@ export default function PokemonDetail() {
     const gradient = changeColorCard(color)
 
     const titulo = 'Explora las estadísticas y movimientos'
-    const contenido = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia architecto'
+    const contenido = 'Conce las estadísticas y movientos de cada Pokémon'
 
     return (
         <>

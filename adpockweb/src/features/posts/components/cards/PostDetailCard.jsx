@@ -23,7 +23,14 @@ export default function PostDetailCard({ title, body, userId, isErrorPost }) {
                     <h2 className="text-md sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-primary uppercase tracking-wide">
                         {title}
                     </h2>
-                    <CommentBadge name={name} username={username} />
+                    {
+                        isErrorPost ? (
+                            <div className="text-sm text-red-500">
+                                No se pudo cargar la información del usuario.
+                            </div>
+                        ) : (
+                            <CommentBadge name={name} username={username} />
+                        )}
                 </div>
 
                 {/* Contenido */}

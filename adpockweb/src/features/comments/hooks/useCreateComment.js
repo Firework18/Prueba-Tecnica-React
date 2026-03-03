@@ -5,17 +5,12 @@ export const useCreateComment = (postId) => {
     const queryClient = useQueryClient()
 
     return useMutation({
+        // El mutationFn se encarga de llamar a la API para crear el comentario
         mutationFn: (body) => createComment(postId, body),
 
-        onMutate: async (newComment) => {
-            // Cancelar cualquier consulta en curso para los comentarios de este post
-            await queryClient.cancelQueries({ queryKey: ['comments', postId] })
-
-            // Obtener los comentarios actuales de la cache del hook de comentarios
-            const previousComments =
-                queryClient.getQueryData(['comments', postId]) || []
-
-            // Crear un nuevo comentario con un ID temporal
+        // El onSuccess se ejecuta tanto para comentarios reales (API) como para los fake/local (sin API)
+        onSuccess: (newComment) => {
+            console.log('Comentario creado:', newComment)
             const commentToAdd = {
                 id: Date.now(),
                 postId,
@@ -23,23 +18,21 @@ export const useCreateComment = (postId) => {
                 ...newComment
             }
 
-            // Actualizar la cache de React Query con el nuevo comentario
-            queryClient.setQueryData(['comments', postId], [
+            // Actualizar cache de React Query para mostrar el nuevo comentario inmediatamente
+            queryClient.setQueryData(['comments', postId], (old = []) => [
                 commentToAdd,
-                ...previousComments
+                ...old
             ])
 
-            // Guadar el nuevo comentario en el LocalStorage
-            const storedComments =
+            // Actualizar localStorage para mantener el nuevo comentario persistente
+            const stored =
                 JSON.parse(localStorage.getItem(`comments-${postId}`)) || []
 
-            // Agregar el nuevo comentario al inicio del nuevo array de comentarios
+            // Agregar el nuevo comentario al inicio del array de comentarios almacenados
             localStorage.setItem(
                 `comments-${postId}`,
-                JSON.stringify([commentToAdd, ...storedComments])
+                JSON.stringify([commentToAdd, ...stored])
             )
-
-            return { previousComments }
         }
     })
 }

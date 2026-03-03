@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createPost } from "../../../api/postApi"
-import { set } from "zod"
 
 export const useCreatePost = () => {
     const queryClient = useQueryClient()
@@ -21,7 +20,7 @@ export const useCreatePost = () => {
                 ...old
             ])
 
-            // Guardar solo creados en el LocalStorage para mantenerlos persistentes
+            // Guardar solo los posts creados en el LocalStorage para mantenerlos persistentes
             const storedCreated =
                 JSON.parse(localStorage.getItem('createdPosts')) || []
 
