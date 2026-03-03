@@ -7,9 +7,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 
 export default function Layout() {
     return (
-        <div>
+        <div className='bg-base-300'>
             <Navbar></Navbar>
-
 
             <Outlet />
 

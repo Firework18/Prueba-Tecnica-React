@@ -1,0 +1,25 @@
+import React from 'react'
+import Pagination from './Pagination'
+
+export default function Filter({ pokeData, pokePerPage, setCurrentPage, currentPage, setPokePerPage, tipo }) {
+    return (
+        <div>
+            <section className="my-10 flex flex-col items-center">
+                <Pagination totalPokes={pokeData?.length} pokePerPage={pokePerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
+                <div className='flex flex-col md:flex-row gap-5 mt-5 items-center justify-center'>
+                    <div className='badge badge-secondary'>Filtrar por</div>
+                    <select name="filtrar" value={pokePerPage} className='bg-base-300'
+                        onChange={(e) => {
+                            setPokePerPage(Number(e.target.value))
+                            setCurrentPage(1)
+                        }}>
+                        <option value={10}>10 {tipo}</option>
+                        <option value={20}>20 {tipo}</option>
+                        <option value={50}>50 {tipo}</option>
+                        <option value={100}>100 {tipo}</option>
+                    </select>
+                </div>
+            </section>
+        </div>
+    )
+}

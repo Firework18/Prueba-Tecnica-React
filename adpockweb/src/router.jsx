@@ -1,11 +1,12 @@
 
 import { createBrowserRouter } from "react-router-dom"
 import Layout from "./layouts/Layout"
-import Home from "./pages/Home"
-import About from "./pages/About"
-import Pokemons from "./pages/Pokemons"
-import PokemonDetail from "./pages/PokemonDetail"
-import Blog from "./pages/Blog"
+import Home from "../src/pages/Home"
+import About from "../src/pages/About"
+import Pokemons from "../src/features/pokemons/pages/Pokemons"
+import PokemonDetail from "../src/features/pokemons/pages/PokemonDetail"
+import Blog from "../src/features/posts/pages/Blog"
+import PostDetail from "../src/features/posts/pages/PostDetail"
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: '/blog',
                 element: <Blog />
+            },
+            {
+                path: '/blog/:postId/comentarios',
+                element: <PostDetail />
             }
         ]
     }
