@@ -83,7 +83,7 @@ export default function PokemonDetail() {
                         {/* Habilidades del pokemon */}
                         <div className='bg-base-100 rounded-3xl p-5 w-full'>
                             <h3 className="badge badge-accent p-3 text-xl font-semibold mb-4">Habilidades</h3>
-                            <div className='grid grid-cols-2 gap-2 place-self-center'>
+                            <div className='grid md:grid-cols-2 gap-2 place-self-center'>
                                 {data?.abilities.map(item =>
                                     <p className='badge badge-secondary'>{item.ability?.name}</p>
                                 )}
